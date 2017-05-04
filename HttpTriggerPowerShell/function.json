@@ -3,8 +3,7 @@
     {
       "name": "req",
       "direction": "in",
-	  "methods": [ "GET" ],
-	  "route": HttpTriggerPowerShell/{json}",
+	  "methods": [ "POST" ],
 	  "authLevel": "anonymous"
     },
     {

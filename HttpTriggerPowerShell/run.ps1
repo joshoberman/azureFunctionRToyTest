@@ -1,7 +1,11 @@
 # POST method: $req
-$inputJson = Get-Content $req 
+$requestBody = Get-Content $req -Raw | ConvertFrom-Json
+$env:in_json = $requestBody.json
+#$env:in_json = Get-Content "sample_input\sample.json"
 
-cd D:\home\site\wwwroot\runCalc
-D:\home\R-3.3.3\bin\x64\Rscript.exe testAzureFunction.R $inputJson $outJson> output\output.log 2>&1
+cd D:\home\site\wwwroot\dist
 
-Out-File -Encoding Ascii -FilePath $res -inputObject $outJson
+$env:Rscript = ".\resources\R-Portable\App\R-Portable\bin\Rscript.exe"
+$output = & $env:Rscript ".\resources\process_json.R"
+
+Out-File -Encoding Ascii -FilePath $res -inputObject $output
