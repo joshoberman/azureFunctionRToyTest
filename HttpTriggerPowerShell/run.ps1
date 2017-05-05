@@ -6,6 +6,6 @@ $env:in_json = $requestBody.json
 cd D:\home\site\wwwroot\script
 
 $env:Rscript = "D:\home\R-3.3.3\bin\x64\Rscript.exe"
-$output = &$env:Rscript testAzureFunction.R
+$output = &'D:\home\R-3.3.3\bin\x64\Rscript.exe' testAzureFunction.R
 
 Out-File -Encoding Ascii -FilePath $res -inputObject $output

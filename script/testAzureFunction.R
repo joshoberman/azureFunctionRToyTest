@@ -1,8 +1,11 @@
 library(devtools) 
+library(jsonlite)
 library(soiCalcEngine)
 
 input_json <<- Sys.getenv("in_json")
 
-output_json <- runCalc(input_json)
+tm <- system.time({output_json <- runCalc(input_json)})
 
-write(output_json, stdout())
+out_list <- jsonlite::toJSON(list(time = tm, out_json = output_json))
+
+write(out_list, stdout())
